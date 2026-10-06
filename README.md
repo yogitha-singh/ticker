@@ -1,128 +1,114 @@
 <div align="center">
 
-<img src="demo.png" alt="TICKER - Live stock, crypto and ETF tracker" width="100%" />
+<img src="https://img.shields.io/badge/%E2%96%B2-TICKER-00d97e?style=for-the-badge&labelColor=0a0e14" alt="TICKER" height="42">
 
-<br/>
+# T I C K E R
 
-# TICKER
+*Markets, live. In your browser.*
 
-### Markets, live. In your browser.
+A premium live stock & crypto tracker with a watchlist, portfolio P&L and candlestick charts, styled like a trading terminal.
 
-A single-page stock, crypto and ETF tracker with a watchlist, portfolio P&L, and live candlestick charts, styled like a professional trading terminal.
+<br>
 
-<br/>
+[![Live Demo](https://img.shields.io/badge/LIVE%20DEMO-ticker--jet.vercel.app-00d4ff?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0a0e14)](https://ticker-jet.vercel.app/)
 
-[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-ticker--jet.vercel.app-00d4ff?style=for-the-badge&labelColor=0a0e14)](https://ticker-jet.vercel.app/)
-[![Made with Vanilla JS](https://img.shields.io/badge/Vanilla_JS-ES6+-f7df1e?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Chart.js](https://img.shields.io/badge/Chart.js-4.4-ff6384?style=for-the-badge&logo=chart.js&logoColor=white)](https://www.chartjs.org/)
-[![Yahoo Finance](https://img.shields.io/badge/Yahoo_Finance-API-6001d2?style=for-the-badge)](https://finance.yahoo.com/)
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+![HTML5](https://img.shields.io/badge/HTML5-0a0e14?style=flat-square&logo=html5&logoColor=e34f26)
+![CSS3](https://img.shields.io/badge/CSS3-0a0e14?style=flat-square&logo=css3&logoColor=1572b6)
+![JavaScript](https://img.shields.io/badge/Vanilla%20JS-0a0e14?style=flat-square&logo=javascript&logoColor=f7df1e)
+![Chart.js](https://img.shields.io/badge/Chart.js-0a0e14?style=flat-square&logo=chartdotjs&logoColor=ff6384)
+![Vercel](https://img.shields.io/badge/Vercel-0a0e14?style=flat-square&logo=vercel&logoColor=white)
+![No API key](https://img.shields.io/badge/API%20key-none-00d97e?style=flat-square&labelColor=0a0e14)
 
-<br/>
+<br>
+
+<a href="https://ticker-jet.vercel.app/">
+  <img src="demo.png" alt="TICKER dashboard: watchlist with sparklines, portfolio panel and market movers" width="100%">
+</a>
 
 </div>
 
----
+<br>
 
-## What is TICKER?
+## Overview
 
-TICKER is a self-contained market dashboard that runs entirely in your browser. No backend, no API keys, no build step. Search any stock, crypto, ETF, or index across global markets. Track live prices, save a watchlist, and manage a portfolio with real-time P&L.
+TICKER pulls live quotes from Yahoo Finance and shows them in a dark, glassmorphic dashboard. Search any symbol worldwide, chart it across eight timeframes, track a watchlist, and see your portfolio's profit and loss at a glance. Green and red mean direction only; cyan marks what you can click.
 
-Built with vanilla JavaScript because a project like this does not need a framework. It needs discipline.
+**Try it now: [ticker-jet.vercel.app](https://ticker-jet.vercel.app/)**
 
-<br/>
+## Features
+
+| | |
+|---|---|
+| **Universal search** | Stocks, crypto, ETFs and indices. Press `/` to focus, arrows to navigate, `Enter` to load. |
+| **Live quotes** | Price, day change, high/low, 52-week range and volume. Refreshes every 15s while the market is open. |
+| **Three chart types** | Line, candlestick and area, across 1D · 5D · 1M · 6M · YTD · 1Y · 5Y · MAX. |
+| **Watchlist** | Sparklines, one-click loading, saved in your browser. |
+| **Portfolio** | Weighted-average cost, P&L in money and percent, allocation doughnut. |
+| **News** | Top headlines for the selected ticker. |
+| **Market movers** | Top gainers, losers and most active, refreshed every 30s. |
+| **Shareable links** | `?symbol=AAPL` opens straight to a ticker. `←` `→` cycles your watchlist. |
+
+## Supported markets
+
+| Market | Format | Example |
+|---|---|---|
+| US stocks and ETFs | plain symbol | `AAPL`, `SPY` |
+| Indian stocks | `.NS` suffix | `RELIANCE.NS` |
+| Crypto | `-USD` suffix | `BTC-USD` |
+| Indices | `^` prefix | `^GSPC` |
+
+## Tech stack
+
+- **Frontend:** HTML5, CSS3 (custom properties, glassmorphism), vanilla ES6+ JavaScript
+- **Charts:** Chart.js 4, chartjs-chart-financial, Luxon
+- **Data:** Yahoo Finance (free, no key) via CORS proxies
+- **Type:** Inter for UI, JetBrains Mono for numbers, Instrument Serif for the tagline
+- **Hosting:** Vercel (static)
+
+## Project structure
+
+```
+ticker/
+├── index.html      layout and markup
+├── style.css       terminal theme
+├── script.js       UI, charts, search, watchlist
+├── api.js          Yahoo fetching, proxy fallback, caching
+├── portfolio.js    holdings math and persistence
+└── demo.png        screenshot
+```
+
+## Run locally
+
+```bash
+git clone <your-repo-url>
+cd ticker
+python3 -m http.server 8000
+```
+
+Open <http://localhost:8000>. To deploy, import the folder into Vercel as a static site.
+
+## API notes
+
+- Yahoo blocks direct browser requests, so calls race `corsproxy.io` and `allorigins.win`, and the first good response wins.
+- Quotes are cached for 30s, search and news for 5 minutes.
+- Yahoo's free chart endpoint has no market cap, P/E, beta or dividend yield, so those show "—".
+- Public proxies can rate-limit. For heavy use, run your own proxy as a Vercel serverless function.
+- Data is delayed up to 15 minutes. This is not financial advice.
+
+## Roadmap
+
+- [ ] Volume bars under the chart
+- [ ] Price alerts
+- [ ] Compare-with overlay
+- [ ] Light theme
+- [ ] Tabbed panels on mobile
+
+## Credits
+
+Data from [Yahoo Finance](https://finance.yahoo.com). Charts by [Chart.js](https://www.chartjs.org). Built on Day 3 of a 7-day vibe coding challenge.
 
 <div align="center">
 
-| Global Search | Live Charts | Watchlist | Portfolio | News |
-|:---:|:---:|:---:|:---:|:---:|
-| Stocks, Crypto, ETFs | Line, Candles, Area | Sparklines + Live | P&L + Allocation | Per Ticker |
+<sub>TICKER v1.0 · Markets, live.</sub>
 
 </div>
-
----
-
-## Feature Highlights
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### Market Data
-- Global search for stocks, crypto, ETFs, indices
-- Live price, day change, day high/low, 52W range, volume
-- Line, Candlestick, and Area chart types
-- 8 timeframes: 1D, 5D, 1M, 6M, YTD, 1Y, 5Y, MAX
-- Market open/closed detection (crypto trades 24/7)
-
-</td>
-<td width="50%" valign="top">
-
-### Personal Layer
-- Watchlist with inline sparklines (persisted)
-- Portfolio with weighted-average cost basis
-- Live P&L and percentage return
-- Allocation doughnut chart
-- Latest news headlines per ticker
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### Interactions
-- Keyboard-first: / search, left/right navigate, Esc close
-- Shareable URLs: ?symbol=AAPL
-- Toast notifications
-- Skeleton loaders
-- Reduced-motion support
-
-</td>
-<td width="50%" valign="top">
-
-### Market Pulse
-- Top Gainers
-- Top Losers
-- Most Active
-- Auto-refresh every 30 seconds
-- Click any mover to load instantly
-
-</td>
-</tr>
-</table>
-
----
-
-## Supported Markets
-
-| Market | Suffix | Example |
-|:---|:---:|:---|
-| US Stocks | none | AAPL, TSLA, NVDA |
-| NSE India | .NS | RELIANCE.NS, TCS.NS |
-| BSE India | .BO | RELIANCE.BO |
-| Crypto | -USD | BTC-USD, ETH-USD |
-| ETFs | none | SPY, QQQ, VOO |
-| Indices | ^ prefix | ^GSPC, ^NSEI |
-
----
-
-## Tech Stack
-
-<div align="center">
-
-| Layer | Technology |
-|:---:|:---|
-| Markup | HTML5 |
-| Styling | CSS3 - custom properties, glassmorphism, HUD accents |
-| Logic | Vanilla JavaScript (ES6+) |
-| Charts | Chart.js 4 + chartjs-chart-financial + Luxon adapter |
-| Data | Yahoo Finance (no key required) |
-| Fonts | Inter, JetBrains Mono, Instrument Serif |
-| Storage | localStorage |
-| Deploy | Vercel (static) |
-
-</div>
-
----
-
-## Architecture
