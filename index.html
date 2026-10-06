@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TICKER · Markets, live.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.1/dist/chartjs-adapter-luxon.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@0.1.1/dist/chartjs-chart-financial.min.js"></script>
+</head>
+<body>
+<header class="bar">
+  <div class="brand"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="1" y="1" width="22" height="22" fill="none" stroke="#00d4ff" stroke-width="2"/><path d="M5 17l5-6 4 3 5-8" fill="none" stroke="#00d97e" stroke-width="2"/></svg><b>TICKER</b><i>Markets, live.</i></div>
+  <div class="search"><input id="q" placeholder="Search stocks, crypto, ETFs  ( / )" autocomplete="off" spellcheck="false"><div id="sugg" class="sugg" hidden></div></div>
+  <div class="right"><span id="mkt" class="pill"><s class="dot"></s>MARKET</span><span class="num" id="hdrTotal">$0.00</span></div>
+</header>
+
+<main class="grid">
+  <aside class="panel" id="watch"><h3>WATCHLIST <span id="wCount" class="muted"></span></h3><div id="wList"></div><button class="btn ghost" id="addT">+ Add ticker</button></aside>
+
+  <section class="panel center">
+    <div id="hero" class="hero"><h1>Search any stock, crypto, or ETF</h1><p class="muted">Try a symbol, or pick one:</p>
+      <div class="chips"><button>AAPL</button><button>TSLA</button><button>NVDA</button><button>BTC-USD</button><button>RELIANCE.NS</button><button>SPY</button></div></div>
+    <div id="view" hidden>
+      <div class="head"><div><div class="sym num" id="sym"></div><div class="muted" id="name"></div><span class="badge" id="exch"></span></div>
+        <div class="px"><div class="price num" id="price"></div><div><span class="pill num" id="chg"></span> <span class="muted num" id="asof"></span></div></div></div>
+      <div class="tools"><div class="seg" id="tfs"></div><div class="seg" id="types"><button data-t="line">Line</button><button data-t="candlestick">Candles</button><button data-t="area">Area</button></div>
+        <button class="btn ghost" id="addW">★ Watch</button></div>
+      <div class="chartbox"><canvas id="chart"></canvas><div id="skel" class="skel" hidden></div></div>
+      <div class="stats" id="stats"></div>
+    </div>
+  </section>
+
+  <aside class="panel" id="right">
+    <h3>PORTFOLIO</h3>
+    <div class="num big" id="pTotal">$0.00</div><div id="pPnl" class="num muted">Add a holding to begin</div>
+    <button class="btn" id="addH">Add holding</button>
+    <div id="hList"></div>
+    <div class="pie"><canvas id="pie"></canvas></div>
+    <h3>LATEST NEWS</h3><div id="news" class="muted">Select a ticker.</div>
+  </aside>
+</main>
+
+<section class="movers panel"><div><h3>TOP GAINERS</h3><div id="mg"></div></div><div><h3>TOP LOSERS</h3><div id="ml"></div></div><div><h3>MOST ACTIVE</h3><div id="ma"></div></div></section>
+
+<footer class="bar foot"><span>Data: Yahoo Finance · Delayed up to 15 min</span><span>Last refresh: <span id="last" class="num">—</span></span><span>TICKER v1.0</span></footer>
+
+<dialog id="dlg"><form method="dialog" id="hf"><h3>ADD HOLDING</h3>
+  <label>Symbol<input name="sym" required placeholder="AAPL"></label>
+  <label>Quantity<input name="qty" type="number" step="any" min="0" required></label>
+  <label>Buy price<input name="price" type="number" step="any" min="0" required></label>
+  <label>Buy date<input name="date" type="date"></label>
+  <div class="row"><button class="btn ghost" value="cancel" formnovalidate>Cancel</button><button class="btn" value="ok">Save holding</button></div></form></dialog>
+<div id="toast" class="toast"></div>
+<script src="api.js"></script><script src="portfolio.js"></script><script src="script.js"></script>
+</body>
+</html>
