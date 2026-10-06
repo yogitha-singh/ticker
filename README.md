@@ -105,7 +105,7 @@ Open <http://localhost:8000>. To deploy, import the folder into Vercel as a stat
 
 ## Credits
 
-Data from [Yahoo Finance](https://finance.yahoo.com). Charts by [Chart.js](https://www.chartjs.org). Built on Day 3 of a 7-day vibe coding challenge.
+Data from [Yahoo Finance](https://finance.yahoo.com). Charts by [Chart.js](https://www.chartjs.org). 
 
 <div align="center">
 
